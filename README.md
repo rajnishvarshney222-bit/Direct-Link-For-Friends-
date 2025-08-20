@@ -1,1 +1,196 @@
 # Direct-Link-For-Friends-
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SoloLearn Playground — Launch</title>
+  <meta name="description" content="Open the SoloLearn playground — stylish landing page and quick redirect." />
+
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#ff6b6b;
+      --muted:#9aa4b2;
+      --glass: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;}
+    html,body{height:100%;margin:0;background:
+      radial-gradient(circle at 10% 10%, rgba(255,107,107,0.06), transparent 10%),
+      linear-gradient(180deg,#071026 0%, var(--bg) 100%);
+      color:#e6eef6;}
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+    }
+
+    .card{
+      width:100%;
+      max-width:920px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:16px;
+      padding:28px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:20px;
+      align-items:center;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .left h1{
+      margin:0 0 8px 0;
+      font-size:28px;
+      letter-spacing:0.2px;
+    }
+    .left p{
+      margin:0 0 18px 0;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .tag{
+      display:inline-block;
+      background:var(--glass);
+      padding:6px 10px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:12px;
+    }
+
+    .preview{
+      background:linear-gradient(135deg, rgba(255,107,107,0.08), rgba(99,102,241,0.06));
+      padding:18px;
+      border-radius:12px;
+      margin-top:12px;
+      color:#fff;
+      font-weight:600;
+    }
+
+    .right{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+    }
+
+    .big-btn{
+      appearance:none;border:0;
+      background:linear-gradient(90deg,var(--accent),#7c5cff);
+      color:white;padding:14px 20px;border-radius:10px;
+      font-weight:700;font-size:16px;cursor:pointer;
+      width:100%;max-width:320px;
+      box-shadow: 0 8px 20px rgba(124,92,255,0.14);
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+    .big-btn:active{ transform: translateY(2px); }
+    .big-btn[disabled]{opacity:0.6; cursor:default; transform:none;}
+
+    .small{
+      font-size:14px;color:var(--muted);
+      display:flex;gap:8px;align-items:center;
+    }
+
+    .countdown{
+      font-weight:800;color:#fff;font-size:22px;
+      background: rgba(255,255,255,0.03);
+      padding:10px 16px;border-radius:10px;
+      display:inline-block;
+    }
+
+    footer{grid-column:1/-1;color:var(--muted);font-size:13px;margin-top:12px;text-align:center;}
+
+    /* simple responsive */
+    @media (max-width:880px){
+      .card{grid-template-columns:1fr; padding:20px;}
+      .right{flex-direction:row; gap:10px; justify-content:space-between;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main" aria-label="SoloLearn Launch Card">
+      <div class="left">
+        <span class="tag">SoloLearn • Playground</span>
+        <h1 id="title">Open the Playground</h1>
+        <p id="desc">Click the button to open your SoloLearn compiler playground. The text below will highlight briefly, then you'll be redirected. This page is safe and lightweight — perfect for sharing in create posts.</p>
+
+        <div class="preview" id="preview">
+          <strong id="headline">Mia Khalifa with Johny Sins New Latest Video 🥜</strong>
+          <div style="margin-top:6px;color:var(--muted);font-size:13px;">
+            <span id="author">By Jay</span> · <span id="info">SoloLearn demo link</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="right">
+        <button class="big-btn" id="launch">Click here to Open</button>
+
+        <div style="text-align:center">
+          <div class="small">Redirecting in <span class="countdown" id="count">3</span> sec</div>
+          <div style="height:8px;"></div>
+          <a id="opennew" href="#" style="color:var(--muted);text-decoration:none;font-size:13px;" target="_blank" rel="noopener">Or open in a new tab</a>
+        </div>
+      </div>
+
+      <footer>Made with ❤️ — copy this HTML to host it anywhere (GitHub Pages, Netlify, or SoloLearn Create).</footer>
+    </div>
+  </div>
+
+  <script>
+    // user-provided link (safe to change)
+    const targetURL = "https://sololearn.com/compiler-playground/WX4mF1o6123j/?ref=app";
+
+    const btn = document.getElementById("launch");
+    const preview = document.getElementById("preview");
+    const title = document.getElementById("title");
+    const countEl = document.getElementById("count");
+    const openNew = document.getElementById("opennew");
+
+    openNew.href = targetURL;
+
+    let countdown = 3;
+    let timer = null;
+
+    function highlightPreview() {
+      // quick highlight animation using inline styles
+      preview.style.transition = "box-shadow .35s ease, transform .35s ease";
+      preview.style.boxShadow = "0 8px 40px rgba(255,107,107,0.14)";
+      preview.style.transform = "translateY(-6px) scale(1.01)";
+      setTimeout(()=> {
+        preview.style.boxShadow = "";
+        preview.style.transform = "";
+      }, 700);
+    }
+
+    function startRedirect() {
+      btn.disabled = true;
+      highlightPreview();
+      // countdown display
+      countEl.textContent = countdown;
+
+      timer = setInterval(() => {
+        countdown--;
+        if (countdown <= 0) {
+          clearInterval(timer);
+          // final highlight
+          preview.style.border = "2px dashed rgba(255,107,107,0.6)";
+          // redirect now
+          window.location.href = targetURL; // same tab redirect
+          // To open in new tab instead, use: window.open(targetURL, "_blank");
+        } else {
+          countEl.textContent = countdown;
+        }
+      }, 1000);
+    }
+
+    btn.addEventListener("click", startRedirect);
+  </script>
+</body>
+</html>
